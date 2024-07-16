@@ -4,6 +4,5 @@ namespace Proximity_Alert{
     }
 
     public class ProximityEvents:Dictionary<string, DateTime>{
-        
     }
 }

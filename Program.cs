@@ -95,13 +95,13 @@ namespace Proximity_Alert
         }
 
         // Event callback that detects when the application process is shutting down 
-        public static void OnShutdown(object obj, EventArgs args)
+        public static void OnShutdown(object? obj, EventArgs args)
         {
             DeallocateObjectsFromRAM();
         }
 
         // Event callback that detects when the application is terminated via [Ctrl + C]
-        public static void Cancelled(object obj, ConsoleCancelEventArgs args)
+        public static void Cancelled(object? obj, ConsoleCancelEventArgs args)
         {
             DeallocateObjectsFromRAM();
         }

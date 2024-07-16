@@ -2,9 +2,9 @@ namespace Proximity_Alert
 {
     interface CRUD_Strategy
     {
-        public Task<string> Get<Value>(Value value);
-        public Task<bool> Insert<Value>(Value value);
-        public Task<bool> Delete<Value>(Value value);
-        public Task<bool> Update<Value>(Value value);
+        public Task<ReturnType> Get<Value, ReturnType>(Value value);
+        public Task<ReturnType> Insert<Value, ReturnType>(Value value);
+        public Task<ReturnType> Delete<Value, ReturnType>(Value value);
+        public Task<ReturnType> Update<Value, ReturnType>(Value value);
     }
 }

@@ -20,3 +20,4 @@
 /home/teodor/Desktop/Proximity_Alert/obj/Debug/net8.0/Proximity_Alert.pdb
 /home/teodor/Desktop/Proximity_Alert/obj/Debug/net8.0/Proximity_Alert.genruntimeconfig.cache
 /home/teodor/Desktop/Proximity_Alert/obj/Debug/net8.0/ref/Proximity_Alert.dll
+/home/teodor/Desktop/Proximity_Alert/obj/Debug/net8.0/Proximity_Alert.sourcelink.json
