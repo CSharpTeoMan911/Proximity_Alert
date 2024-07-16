@@ -1,0 +1,1 @@
+sudo apt install gpio -y && sudo apt install libgpiod-dev -y
