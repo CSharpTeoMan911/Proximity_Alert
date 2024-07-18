@@ -46,24 +46,6 @@ namespace Proximity_Alert{
             return model;
         }
 
-        public Task<bool> Set_Configuration_File_Permissions(string config_file){
-            #pragma warning disable CA1416 // Validate platform compatibility
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == true){
-                FileInfo settings_file_info = new FileInfo(config_file);
-                System.Security.AccessControl.FileSecurity settings_file_security = settings_file_info.GetAccessControl();
-                settings_file_security.AddAccessRule(new System.Security.AccessControl.FileSystemAccessRule(System.Security.Principal.WindowsIdentity.GetCurrent().Name, System.Security.AccessControl.FileSystemRights.Write, System.Security.AccessControl.AccessControlType.Allow));
-                settings_file_security.AddAccessRule(new System.Security.AccessControl.FileSystemAccessRule(System.Security.Principal.WindowsIdentity.GetCurrent().Name, System.Security.AccessControl.FileSystemRights.Read, System.Security.AccessControl.AccessControlType.Allow));
-                settings_file_security.AddAccessRule(new System.Security.AccessControl.FileSystemAccessRule(System.Security.Principal.WindowsIdentity.GetCurrent().Name, System.Security.AccessControl.FileSystemRights.Delete, System.Security.AccessControl.AccessControlType.Allow));
-                settings_file_info.SetAccessControl(settings_file_security);
-            }
-            else{
-                File.SetUnixFileMode(config_file, UnixFileMode.UserRead | UnixFileMode.UserWrite);
-            }
-            #pragma warning restore CA1416 // Validate platform compatibility
-
-            return Task.FromResult(true);
-        }
-
         private async Task<string?> SerialiseConfig(){
             StringBuilder? result = new StringBuilder();
             

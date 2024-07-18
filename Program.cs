@@ -60,6 +60,7 @@ namespace Proximity_Alert
         }
 
 
+
         // Callback method that listens to voltage changes in the 'Echo' pin.
         public static void OnUltrasonicPulseReceived(object sender, PinValueChangedEventArgs args){
             
@@ -68,8 +69,6 @@ namespace Proximity_Alert
             {
                 // Get the total number of milliseconds and divide them by 1000 to get the total number of seconds ellapsed
                 double seconds = (DateTime.Now - pulse_init).TotalMilliseconds / 1000;
-
-                Console.WriteLine(seconds);
 
                 ///////////////////////////////////////////////////
                 //                                               //
@@ -89,8 +88,14 @@ namespace Proximity_Alert
 
                 // Distance is the elapsed time times the speed of sound divided by 2
                 int distance = (int)(seconds * 34300 / 2);
+
+                if(distance <= 100){
+                    if((DateTime.Now - last_proximity_alert).TotalMinutes <= 10){
+                        last_proximity_alert = DateTime.Now;
+                    }
+                }
                 
-                Console.WriteLine($"Distance: {distance} cm"); 
+                Console.WriteLine($"\n\nDistance: {distance} cm"); 
             }
         }
 

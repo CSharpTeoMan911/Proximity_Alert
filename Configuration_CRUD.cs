@@ -2,6 +2,7 @@
 namespace Proximity_Alert
 {
     using System.Runtime.InteropServices;
+    using System.Diagnostics;
     using System.Text;
     using System.IO;
     class Configuration_CRUD : Shared, CRUD_Strategy
@@ -14,27 +15,31 @@ namespace Proximity_Alert
             throw new NotImplementedException();
         }
 
-        public Task<ReturnType> Get<Value, ReturnType>(Value value)
+        public async Task<ReturnType> Get<Value, ReturnType>(Value value)
         {
+            Configuration_File_Model model = new Configuration_File_Model();
+
             StringBuilder builder = new StringBuilder(path);
             PathBuilder(builder, config_dir);
 
             if(Directory.Exists(builder.ToString()) == true) {
                 PathBuilder(builder, file_name);
-            }
-            else{
-                PathBuilder(builder, file_name);
                 if(File.Exists(builder.ToString()) == true)
                 {
-
+                    await file_management.Read_Configuration_File(builder.ToString());
                 }
                 else
                 {
-
+                    await file_management.Create_Configuration_File(builder.ToString());
                 }
+            }
+            else{
+                Directory.CreateDirectory(builder.ToString());
+                PathBuilder(builder, file_name);
+                await file_management.Create_Configuration_File(builder.ToString());
             }         
 
-            throw new NotImplementedException();
+            return (ReturnType)(object)model;
         }
 
         public Task<ReturnType> Insert<Value, ReturnType>(Value value)
