@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xQjHGYB8jho=",
+  "dgSpecHash": "Vs6cQ+sNem8=",
   "success": true,
   "projectFilePath": "/home/teodor/Desktop/Proximity_Alert/Proximity_Alert.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,7 @@
     "/home/teodor/.nuget/packages/litedb/4.1.4/litedb.4.1.4.nupkg.sha512",
     "/home/teodor/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/home/teodor/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "/home/teodor/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/home/teodor/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/home/teodor/.nuget/packages/system.device.gpio/3.2.0/system.device.gpio.3.2.0.nupkg.sha512",
     "/home/teodor/.nuget/packages/system.io/4.3.0/system.io.4.3.0.nupkg.sha512",
     "/home/teodor/.nuget/packages/system.reactive/4.0.0/system.reactive.4.0.0.nupkg.sha512",

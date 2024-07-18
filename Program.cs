@@ -3,7 +3,7 @@ namespace Proximity_Alert
     using System.Device.Gpio;
     using System.Threading;
     
-    class Program
+    class Program:Shared
     {
         // 'Trig' is the pin of the ultrasonic sensor that when a voltage of 3.3V is applied it sends an ultrasonic pulse
         private static readonly int Trig = 38;
