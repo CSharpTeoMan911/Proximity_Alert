@@ -53,12 +53,7 @@ namespace Proximity_Alert
         }
 
         private void PathBuilder(StringBuilder builder, string section){
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) == true){
-                builder.Append("\\");
-            }
-            else{
-                builder.Append("/");
-            }
+            builder.Append("/");
             builder.Append(section);
         }
     }
