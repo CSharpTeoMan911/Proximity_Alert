@@ -3,6 +3,7 @@ namespace Proximity_Alert
 {
     class Firebase_CRUD : CRUD_Strategy
     {
+        
 
         public Task<ReturnType> Delete<Value, ReturnType>(Value value)
         {

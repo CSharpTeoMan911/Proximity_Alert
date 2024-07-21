@@ -21,3 +21,4 @@
 /home/teodor/Desktop/Proximity_Alert/obj/Debug/net8.0/Proximity_Alert.genruntimeconfig.cache
 /home/teodor/Desktop/Proximity_Alert/obj/Debug/net8.0/ref/Proximity_Alert.dll
 /home/teodor/Desktop/Proximity_Alert/obj/Debug/net8.0/Proximity_Alert.sourcelink.json
+/home/teodor/Desktop/Proximity_Alert/bin/Debug/net8.0/Firebase.Storage.dll
