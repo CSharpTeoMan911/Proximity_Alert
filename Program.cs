@@ -2,7 +2,8 @@ namespace Proximity_Alert
 {
     using System.Device.Gpio;
     using System.Threading;
-    
+    using System.Diagnostics;
+
     class Program:Shared
     {
         // 'Trig' is the pin of the ultrasonic sensor that when a voltage of 3.3V is applied it sends an ultrasonic pulse
@@ -36,6 +37,13 @@ namespace Proximity_Alert
         // Main entry point of the application
         public static void Main(string[] args)
         {
+            _= Main_Op().Result;
+        }
+
+
+        private static async Task<bool> Main_Op(){
+            await Get_Config();
+
             AppDomain.CurrentDomain.ProcessExit += OnShutdown;
             Console.CancelKeyPress += Cancelled;
 
@@ -57,6 +65,8 @@ namespace Proximity_Alert
                 // Sleep the current CPU thread 1000 milliseconds (1 second)
                 Thread.Sleep(1000);
             }
+
+            return true;
         }
 
 
@@ -109,6 +119,12 @@ namespace Proximity_Alert
         public static void Cancelled(object? obj, ConsoleCancelEventArgs args)
         {
             DeallocateObjectsFromRAM();
+        }
+
+        private async void SnapShot(){
+            // ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 ~/Desktop/test.jpeg
+            Process process = new Process();
+            process.StartInfo.FileName = "ffmpeg";
         }
 
         // Method that is deallocating unmanaged objects from the RAM memory and that is closing the opened GPIO pins
