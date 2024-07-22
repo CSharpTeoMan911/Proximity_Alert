@@ -12,6 +12,7 @@ namespace Proximity_Alert
 
         public Task<ReturnType> Get<Value, ReturnType>(Value value)
         {
+            
             throw new NotImplementedException();
         }
 

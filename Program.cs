@@ -3,6 +3,7 @@ namespace Proximity_Alert
     using System.Device.Gpio;
     using System.Threading;
     using System.Diagnostics;
+    using System.Text;
 
     class Program:Shared
     {
@@ -72,7 +73,7 @@ namespace Proximity_Alert
 
 
         // Callback method that listens to voltage changes in the 'Echo' pin.
-        public static void OnUltrasonicPulseReceived(object sender, PinValueChangedEventArgs args){
+        public static async void OnUltrasonicPulseReceived(object sender, PinValueChangedEventArgs args){
             
             // If the voltage changed in the 'Echo' pin and the voltage is the minimum value (0 V)
             if(PinEventTypes.Falling == args.ChangeType)
@@ -99,9 +100,10 @@ namespace Proximity_Alert
                 // Distance is the elapsed time times the speed of sound divided by 2
                 int distance = (int)(seconds * 34300 / 2);
 
-                if(distance <= 100){
-                    if((DateTime.Now - last_proximity_alert).TotalMinutes <= 10){
+                if(distance <= 30){
+                    if((DateTime.Now - last_proximity_alert).TotalMinutes >= 10){
                         last_proximity_alert = DateTime.Now;
+                        await SnapShot();
                     }
                 }
                 
@@ -121,10 +123,21 @@ namespace Proximity_Alert
             DeallocateObjectsFromRAM();
         }
 
-        private async void SnapShot(){
+        private static async Task<bool> SnapShot(){
             // ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 ~/Desktop/test.jpeg
             Process process = new Process();
             process.StartInfo.FileName = "ffmpeg";
+
+            StringBuilder path_builder = new StringBuilder("-f video4linux2 -i /dev/video0 -vframes 1 ");
+            path_builder.Append(path);
+            path_builder.Append("/snap.jpeg -y");
+
+            process.StartInfo.Arguments = path_builder.ToString();
+
+            process.Start();
+            process.WaitForExit(120000);
+
+            return true;
         }
 
         // Method that is deallocating unmanaged objects from the RAM memory and that is closing the opened GPIO pins
