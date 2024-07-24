@@ -2,7 +2,7 @@
 sudo apt install ffmpeg
 
 # Ensure the GPIO drivers are installed
-sudo apt install gpio -y && sudo apt install libgpiod-dev -y
+sudo apt install gpio -y || sudo apt install wiringpi -y && sudo apt install libgpiod-dev -y
 
 # Edit the boot config file and comment out the line 
 # 'camera_auto_detect=1'. This must be done because

@@ -128,15 +128,19 @@ namespace Proximity_Alert
             Process process = new Process();
             process.StartInfo.FileName = "ffmpeg";
 
-            StringBuilder path_builder = new StringBuilder("-f video4linux2 -i /dev/video0 -vframes 1 ");
+            StringBuilder path_builder = new StringBuilder("-f video4linux2 -i /dev/video0 -video_size 640x480 -vframes 1 ");
             path_builder.Append(path);
-            path_builder.Append("/snap.jpeg -y");
+            path_builder.Append("snap.jpeg -y");
 
             process.StartInfo.Arguments = path_builder.ToString();
 
             process.Start();
             process.WaitForExit(120000);
 
+            StringBuilder alert_builder = new StringBuilder(path);
+            alert_builder.Append("snap.jpeg");
+            
+            await Insert_Alert(alert_builder.ToString());
             return true;
         }
 

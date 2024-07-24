@@ -56,7 +56,9 @@ namespace Proximity_Alert{
 
             try{
                 JsonTextWriter jw = new JsonTextWriter(tw);
-                JsonSerializer serialiser = new JsonSerializer(); 
+                JsonSerializer serialiser = new JsonSerializer(){
+                    Formatting = Formatting.Indented
+                }; 
                 serialiser.Serialize(jw, model);
 
                 await tw.FlushAsync();
