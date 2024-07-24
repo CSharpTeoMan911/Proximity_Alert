@@ -4,6 +4,7 @@ namespace Proximity_Alert
     using System.Threading;
     using System.Diagnostics;
     using System.Text;
+    using System.Timers;
 
     class Program:Shared
     {
@@ -44,6 +45,12 @@ namespace Proximity_Alert
 
         private static async Task<bool> Main_Op(){
             await Get_Config();
+
+            System.Timers.Timer cache_cleanup = new System.Timers.Timer();
+            cache_cleanup.Interval = 43200000;
+            cache_cleanup.Elapsed += CacheCleanup;
+            cache_cleanup.Start();
+            
 
             AppDomain.CurrentDomain.ProcessExit += OnShutdown;
             Console.CancelKeyPress += Cancelled;
@@ -142,6 +149,10 @@ namespace Proximity_Alert
             
             await Insert_Alert(alert_builder.ToString());
             return true;
+        }
+
+        private static void CacheCleanup(object? sender, ElapsedEventArgs args){
+
         }
 
         // Method that is deallocating unmanaged objects from the RAM memory and that is closing the opened GPIO pins

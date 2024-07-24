@@ -10,14 +10,14 @@ namespace Proximity_Alert
         private readonly Configuration_File_Management file_management = new Configuration_File_Management();
         string config_dir = "conf";
         string file_name = "config.json";
-        public Task<ReturnType> Delete<Value, ReturnType>(Value value)
+        public Task<ReturnType?> Delete<Value, ReturnType>(Value? value)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ReturnType> Get<Value, ReturnType>(Value value)
+        public async Task<ReturnType?> Get<Value, ReturnType>(Value? value)
         {
-            Configuration_File_Model model = new Configuration_File_Model();
+            Configuration_File_Model? model = new Configuration_File_Model();
 
             StringBuilder builder = new StringBuilder(path);
             PathBuilder(builder, config_dir);
@@ -26,7 +26,7 @@ namespace Proximity_Alert
                 PathBuilder(builder, file_name);
                 if(File.Exists(builder.ToString()) == true)
                 {
-                    await file_management.Read_Configuration_File(builder.ToString());
+                    model = await file_management.Read_Configuration_File(builder.ToString());
                 }
                 else
                 {
@@ -39,15 +39,15 @@ namespace Proximity_Alert
                 await file_management.Create_Configuration_File(builder.ToString());
             }         
 
-            return (ReturnType)(object)model;
+            return (ReturnType?)(object?)model;
         }
 
-        public Task<ReturnType> Insert<Value, ReturnType>(Value value)
+        public Task<ReturnType?> Insert<Value, ReturnType>(Value? value)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ReturnType> Update<Value, ReturnType>(Value value)
+        public Task<ReturnType?> Update<Value, ReturnType>(Value? value)
         {
             throw new NotImplementedException();
         }

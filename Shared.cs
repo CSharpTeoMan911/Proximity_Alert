@@ -14,16 +14,14 @@ namespace Proximity_Alert{
         }
 
         protected static async Task<bool> Insert_Alert(string path){
-            FileStream stream = File.OpenRead(path);
+            FileStream stream = File.Open(path, FileMode.Open);
             try{
-                byte[] buffer = new byte[stream.Length];
-                await stream.ReadAsync(buffer, 0, buffer.Length);
+                Tuple<FileStream, Configuration_File_Model?> payload = new Tuple<FileStream, Configuration_File_Model?>(stream, model); 
 
-                Tuple<byte[], Configuration_File_Model> payload = new Tuple<byte[], Configuration_File_Model>(buffer, model); 
-
-                await firebase_crud.Insert<Tuple<byte[], Configuration_File_Model>, bool>(payload);
+                await firebase_crud.Insert<Tuple<FileStream, Configuration_File_Model?>, bool>(payload);
             }
-            catch{
+            catch(Exception E){
+                Console.WriteLine(E.Message);
             }
             finally{
                 await stream.DisposeAsync();
