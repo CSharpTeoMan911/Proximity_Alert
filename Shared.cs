@@ -3,7 +3,7 @@ namespace Proximity_Alert{
     using System.IO;
     class Shared{
         protected static readonly string path = System.AppDomain.CurrentDomain.BaseDirectory;  
-        protected static readonly Strategy firebase_crud = new Strategy(new Firebase_CRUD());
+        private static readonly Strategy firebase_crud = new Strategy(new Firebase_CRUD());
         private static readonly Strategy config_crud = new Strategy(new Configuration_CRUD());
         protected static DateTime last_proximity_alert = DateTime.Now.AddMinutes(-10);
         protected static Configuration_File_Model? model = new Configuration_File_Model();
@@ -27,6 +27,11 @@ namespace Proximity_Alert{
                 await stream.DisposeAsync();
             }
 
+            return true;
+        }
+
+        protected static async Task<bool> Delete_Alerts(){
+            await firebase_crud.Delete<Configuration_File_Model?, object?>(model);
             return true;
         }
     }

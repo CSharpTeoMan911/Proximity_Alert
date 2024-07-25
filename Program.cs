@@ -46,8 +46,9 @@ namespace Proximity_Alert
         private static async Task<bool> Main_Op(){
             await Get_Config();
 
+            //43200000
             System.Timers.Timer cache_cleanup = new System.Timers.Timer();
-            cache_cleanup.Interval = 43200000;
+            cache_cleanup.Interval = 1000;
             cache_cleanup.Elapsed += CacheCleanup;
             cache_cleanup.Start();
             
@@ -151,8 +152,9 @@ namespace Proximity_Alert
             return true;
         }
 
-        private static void CacheCleanup(object? sender, ElapsedEventArgs args){
-
+        private static async void CacheCleanup(object? sender, ElapsedEventArgs args){
+            Console.WriteLine("!!! Clean !!!");
+            await Delete_Alerts();
         }
 
         // Method that is deallocating unmanaged objects from the RAM memory and that is closing the opened GPIO pins
