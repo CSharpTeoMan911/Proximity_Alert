@@ -46,9 +46,8 @@ namespace Proximity_Alert
         private static async Task<bool> Main_Op(){
             await Get_Config();
 
-            //43200000
             System.Timers.Timer cache_cleanup = new System.Timers.Timer();
-            cache_cleanup.Interval = 1000;
+            cache_cleanup.Interval = 3600000;
             cache_cleanup.Elapsed += CacheCleanup;
             cache_cleanup.Start();
             
@@ -132,28 +131,11 @@ namespace Proximity_Alert
         }
 
         private static async Task<bool> SnapShot(){
-            // ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 ~/Desktop/test.jpeg
-            Process process = new Process();
-            process.StartInfo.FileName = "ffmpeg";
-
-            StringBuilder path_builder = new StringBuilder("-f video4linux2 -i /dev/video0 -video_size 640x480 -vframes 1 ");
-            path_builder.Append(path);
-            path_builder.Append("snap.jpeg -y");
-
-            process.StartInfo.Arguments = path_builder.ToString();
-
-            process.Start();
-            process.WaitForExit(120000);
-
-            StringBuilder alert_builder = new StringBuilder(path);
-            alert_builder.Append("snap.jpeg");
-            
-            await Insert_Alert(alert_builder.ToString());
+            await Insert_Alert();
             return true;
         }
 
         private static async void CacheCleanup(object? sender, ElapsedEventArgs args){
-            Console.WriteLine("!!! Clean !!!");
             await Delete_Alerts();
         }
 

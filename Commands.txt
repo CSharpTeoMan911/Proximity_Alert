@@ -1,15 +1,2 @@
-# Ensure Ffmpeg is installed
-sudo apt install ffmpeg
-
 # Ensure the GPIO drivers are installed
 sudo apt install gpio -y || sudo apt install wiringpi -y && sudo apt install libgpiod-dev -y
-
-# Edit the boot config file and comment out the line 
-# 'camera_auto_detect=1'. This must be done because
-# the new Ubuntu Linux versions use the new 
-# 'unicam driver' that cannot be compatible
-# with the Raspberry Pi cameras
-sudo vi /boot/firmware/config.txt
-
-# Command to capture a photo with the camera
-ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 ~/Desktop/test.jpeg

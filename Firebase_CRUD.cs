@@ -4,9 +4,11 @@ namespace Proximity_Alert
     using Firebase.Auth;
     using Firebase.Auth.Providers;
     using Firebase.Auth.Repository;
-    using Firebase.Storage;
     using Firebase.Database;
     using System.Text;
+    using System.IO;
+    using Newtonsoft.Json;
+
     class Firebase_CRUD : CRUD_Strategy
     {
         
@@ -15,25 +17,34 @@ namespace Proximity_Alert
         {
             try{
                 Configuration_File_Model? model = value as Configuration_File_Model;
+
                 if(model != null){
-                        FirebaseStorage? storage = await GetStorage(model);
+                    FirebaseClient? database = await GetDatabase(model);
+                
+                    if(database != null){
+                        string payload = await database.Child("Alerts").OnceAsJsonAsync();
+                        Dictionary<string, Firebase_Database_Model>? deserialsed_payload = await DeserialisePayload(payload);
 
-                        DateTime current = DateTime.Now;
+                        if(deserialsed_payload != null)
+                        {
+                            StringBuilder path_builder = new StringBuilder();
+                            foreach(string s in deserialsed_payload.Keys){
+                                int expiration = Convert.ToInt32(DateTime.Now.AddDays(-1 * model.proximity_alert_expiration_start).ToString("yyyyMMdd"));
+                                int key = Convert.ToInt32(s);
 
-                        int start = model.proximity_alert_expiration_start;
-                        int end = model.proximity_alert_expiration_end;
-
-                        while(start <= end){
-                            DateTime past = current.AddDays(start * -1);
-                            if(storage != null)
-                                await storage.Child(past.ToString("yyyyMMdd")).DeleteAsync();
-                            start++;
+                                if(key <= expiration)
+                                {
+                                    path_builder.Append("Alerts/");
+                                    path_builder.Append(key);
+                                    await database.Child(path_builder.ToString()).DeleteAsync();
+                                    path_builder.Clear();
+                                }
+                            }
                         }
                     }
                 }
-            catch(Exception E){
-                Console.WriteLine($"\n\n{E.Message}\n\n");
             }
+            catch { }
 
 
             return (ReturnType?)(object?)true;
@@ -46,29 +57,21 @@ namespace Proximity_Alert
 
         public async Task<ReturnType?> Insert<Value, ReturnType>(Value? value)
         {
-            Tuple<FileStream, Configuration_File_Model>? buffer = value as Tuple<FileStream, Configuration_File_Model>;
-            FileStream? binary_buffer = buffer?.Item1;
-            Configuration_File_Model? model = buffer?.Item2;
+            Configuration_File_Model? model = value as Configuration_File_Model;
 
-            
-            FirebaseStorage? storage = await GetStorage(model);
             FirebaseClient? database = await GetDatabase(model);
 
             string main_folder = DateTime.Now.ToString("yyyyMMdd");
-            string proximity_alert = DateTime.Now.ToString("yyyyMMddmmss");
+            string proximity_alert = DateTime.Now.ToString("yyyyMMddHHmmss");
 
-            StringBuilder builder = new StringBuilder(proximity_alert);
-            builder.Append(".jpeg");
+            StringBuilder path_builder = new StringBuilder("Alerts/");
+            path_builder.Append(main_folder);
 
-            string? final_path = builder.ToString();
-            Firebase_Storage_File file = new Firebase_Storage_File();
-            file.file_name = final_path;
-
-            if(storage != null)
-                await storage.Child(main_folder).Child(final_path).PutAsync(binary_buffer);
+            Firebase_Alert alert = new Firebase_Alert();
+            alert.alert_name = proximity_alert;
 
             if(database != null)
-                await database.Child("Files/").PostAsync("Test", false);
+                await database.Child(path_builder.ToString()).PostAsync(await SerialisePayload(alert), false);
             
 
             return (ReturnType)(object) true;
@@ -94,19 +97,6 @@ namespace Proximity_Alert
             return IdToken;
         }
 
-        private async Task<FirebaseStorage?> GetStorage(Configuration_File_Model? model){
-            string IdToken = await Authenticate(model);
-
-            FirebaseStorage storage = new FirebaseStorage(
-            model?.firebase_storage_bucket_url,
-            new FirebaseStorageOptions
-            {
-                AuthTokenAsyncFactory = () => Task.FromResult(IdToken),
-                ThrowOnCancel = true,
-            });
-
-            return storage;
-        }
 
         private Task<FirebaseClient?> GetDatabase(Configuration_File_Model? model){
             FirebaseClient? database = new FirebaseClient(
@@ -117,6 +107,51 @@ namespace Proximity_Alert
             });
 
             return Task.FromResult<FirebaseClient?>(database);
+        }
+
+        private async Task<string?> SerialisePayload(Firebase_Alert alert){
+            StringBuilder? result = new StringBuilder();
+            
+            TextWriter tw = new StringWriter(result);
+
+            try{
+                JsonTextWriter jw = new JsonTextWriter(tw);
+                JsonSerializer serialiser = new JsonSerializer(){
+                    Formatting = Formatting.Indented
+                }; 
+                serialiser.Serialize(jw, alert);
+
+                await tw.FlushAsync();
+            }
+            catch{
+
+            }
+            finally{
+                await tw.DisposeAsync();    
+            }
+
+            return result?.ToString();
+        }
+
+        private Task<Dictionary<string, Firebase_Database_Model>?> DeserialisePayload(string serialised_alert){
+
+            Dictionary<string, Firebase_Database_Model>? model = new Dictionary<string, Firebase_Database_Model>(); 
+            
+            TextReader tr = new StringReader(serialised_alert);
+
+            try{
+                JsonTextReader jr = new JsonTextReader(tr);
+                JsonSerializer serialiser = new JsonSerializer(); 
+                model = serialiser.Deserialize<Dictionary<string, Firebase_Database_Model>>(jr);
+            }
+            catch{
+
+            }
+            finally{
+                tr.Dispose();    
+            }
+
+            return Task.FromResult(model);
         }
     }
 }
