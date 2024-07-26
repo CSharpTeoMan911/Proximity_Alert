@@ -4883,7 +4883,7 @@
     ]
   },
   "packageFolders": {
-    "/home/teodor/.nuget/packages/": {}
+    "/root/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -4891,11 +4891,11 @@
       "projectUniqueName": "/home/teodor/Desktop/Proximity_Alert/Proximity_Alert.csproj",
       "projectName": "Proximity_Alert",
       "projectPath": "/home/teodor/Desktop/Proximity_Alert/Proximity_Alert.csproj",
-      "packagesPath": "/home/teodor/.nuget/packages/",
+      "packagesPath": "/root/.nuget/packages/",
       "outputPath": "/home/teodor/Desktop/Proximity_Alert/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/teodor/.nuget/NuGet/NuGet.Config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

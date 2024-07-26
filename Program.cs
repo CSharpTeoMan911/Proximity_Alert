@@ -71,7 +71,7 @@ namespace Proximity_Alert
                 SendUltrasonicPulse();
 
                 // Sleep the current CPU thread 1000 milliseconds (1 second)
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
 
             return true;
