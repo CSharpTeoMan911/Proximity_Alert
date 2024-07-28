@@ -4883,24 +4883,32 @@
     ]
   },
   "packageFolders": {
-    "/root/.nuget/packages/": {}
+    "C:\\Users\\teodo\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/teodor/Desktop/Proximity_Alert/Proximity_Alert.csproj",
+      "projectUniqueName": "C:\\Users\\teodo\\source\\repos\\Proximity_Alert\\Proximity_Alert.csproj",
       "projectName": "Proximity_Alert",
-      "projectPath": "/home/teodor/Desktop/Proximity_Alert/Proximity_Alert.csproj",
-      "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/home/teodor/Desktop/Proximity_Alert/obj/",
+      "projectPath": "C:\\Users\\teodo\\source\\repos\\Proximity_Alert\\Proximity_Alert.csproj",
+      "packagesPath": "C:\\Users\\teodo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\teodo\\source\\repos\\Proximity_Alert\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/root/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\teodo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4961,7 +4969,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/teodor/.dotnet/sdk/8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

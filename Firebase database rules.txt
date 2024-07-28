@@ -1,0 +1,4 @@
+  "rules": {
+    ".read": "auth.uid == 'YOUR_USER_ID'",
+    ".write": "auth.uid == 'YOUR_USER_ID'"
+  }
