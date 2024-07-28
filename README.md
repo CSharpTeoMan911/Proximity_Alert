@@ -65,9 +65,29 @@ Afterwards install the **Gnome Desktop Environment** by using the command **sudo
 
 ![20240727_223401](https://github.com/user-attachments/assets/0cb1b161-16ac-42d7-958e-c125d79c0431)
 
+For the server to be able to detect objects within its proximity it needs an ultrasonic sensor. The ultrasonic sensor is sending ultrasonic sensors from an emitter and receives the ultrasonic pulses at a receiver, which is converting them to electrical pulses using a piezo-electric cristal.
+
 ![Ultrasonic sensor schematics](https://github.com/user-attachments/assets/3c77f498-eb2f-4824-9f13-873712e92855)
 
+![Calculate distance](https://github.com/user-attachments/assets/a7f2946b-cbc6-4914-bd7e-4d4524c3ea2c)
 
 ![Raspberry Pi pinnout](https://github.com/user-attachments/assets/46841a28-44bd-4319-a234-0b6617f687a6)
+
+<br/>
+<br/>
+
+After the ultrasonic sensor was attached, go to the release page of this repository and download and unzip the executable binary. 
+
+![Eva_Capture289888893](https://github.com/user-attachments/assets/f3c9dd9a-98b8-4969-936b-8ddd05abc09f)
+
+![Eva_Capture1496962042](https://github.com/user-attachments/assets/e84d5706-115e-42d6-81fc-ca07589122ba)
+
+Move the folder into the **/etc** directory enter within the directory and start the application using the command **sudo ./Proximity_Alert**
+
+![Proxi location](https://github.com/user-attachments/assets/3bfa8daf-72fa-4442-ac4a-13269eb0a62a)
+
+![Proxi exe loc](https://github.com/user-attachments/assets/c939c768-4174-47a4-abfe-ec17ed469a93)
+
+
 
 ![ProximityAlertDemo-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/75450e1e-f91d-413a-9c63-c39685fb25d9)
