@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Proximity_Alert")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35818570a2b1e2072bcc2b965cbd1b5ae60ef058")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fb51d6b47eb5c0cc1e7dd1f6d0107501e1f35f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Proximity_Alert")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Proximity_Alert")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

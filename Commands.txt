@@ -1,2 +1,11 @@
 # Ensure the GPIO drivers are installed
 sudo apt install gpio -y || sudo apt install wiringpi -y && sudo apt install libgpiod-dev -y
+
+# CREATE A SYSTEMD SERVICE FILE
+sudo vim /etc/systemd/system/proximity-alert.service
+
+# START THE SERVICE
+systemctl start proximity-alert.service
+
+# SET THE SERVICE TO RUN AT OS STARTUP
+systemctl enable proximity-alert.service

@@ -1,0 +1,6 @@
+[Unit]
+Description=Service sends proximity alerts when objects are at a proximity of 30cm or less
+[Service]
+ExecStart=/etc/YOUR_PATH_TO_THE_APP/Proximity_Alert
+[Install]
+WantedBy=multi-user.target
