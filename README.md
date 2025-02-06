@@ -1,4 +1,4 @@
-# Raspberry Pi 4 (Ubuntu Server with Proximity Alert) 🛠️🔍
+# Raspberry Pi4 (Ubuntu Server with Proximity Alert) 🛠️🔍
 ## Overview
 This project leverages a Raspberry Pi 4 microserver running Ubuntu Server 24.04 LTS, with a proximity alert service designed to detect objects within a 30 cm radius. It utilizes advanced features like ultrasonic sensors and C# to create a robust, real-time monitoring system.
 
