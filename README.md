@@ -89,11 +89,12 @@ This enables you to have a full desktop interface when needed, without compromis
 
 ![20240727_223401](https://github.com/user-attachments/assets/0cb1b161-16ac-42d7-958e-c125d79c0431)
 
-![Ultrasonic sensor schematics](https://github.com/user-attachments/assets/3c77f498-eb2f-4824-9f13-873712e92855)
+![352779028-3c77f498-eb2f-4824-9f13-873712e92855](https://github.com/user-attachments/assets/d03d3fa9-6b9d-4bd2-b8c4-1df39a735c31)
 
 ![Calculate distance](https://github.com/user-attachments/assets/a7f2946b-cbc6-4914-bd7e-4d4524c3ea2c)
 
-![Raspberry Pi pinnout](https://github.com/user-attachments/assets/46841a28-44bd-4319-a234-0b6617f687a6)
+![Pin-out legend](https://github.com/user-attachments/assets/25a26f1f-2333-4e78-9d73-518eaf3eb54b)
+
 
 * ➡️Wiring: Connect the ultrasonic sensor to the Raspberry Pi's GPIO pins (detailed schematics are available).
 
