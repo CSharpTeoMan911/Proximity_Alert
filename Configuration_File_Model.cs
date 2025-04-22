@@ -7,6 +7,9 @@ namespace Proximity_Alert{
         public string? firebase_database_url {get;set;}
 
         // E.g. (Delete expired alerts starting 10 days ago) 
-        public int proximity_alert_expiration_start {get;set;} = 10;
+        public int alert_expiration_days {get;set;} = 10;
+
+        // Interval in minutes to check for proximity alerts
+        public int notification_period_minutes {get;set;} = 5;
     }
 }

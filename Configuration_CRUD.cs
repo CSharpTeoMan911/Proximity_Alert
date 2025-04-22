@@ -8,8 +8,7 @@ namespace Proximity_Alert
     class Configuration_CRUD : Shared, CRUD_Strategy
     {
         private readonly Configuration_File_Management file_management = new Configuration_File_Management();
-        string config_dir = "conf";
-        string file_name = "config.json";
+
         public Task<ReturnType?> Delete<Value, ReturnType>(Value? value)
         {
             throw new NotImplementedException();
@@ -19,11 +18,16 @@ namespace Proximity_Alert
         {
             Configuration_File_Model? model = new Configuration_File_Model();
 
-            StringBuilder builder = new StringBuilder(path);
-            PathBuilder(builder, config_dir);
+            StringBuilder builder = new StringBuilder(Shared.path);
+            builder.Append("/");
+            builder.Append(Shared.config_dir);
+            
 
-            if(Directory.Exists(builder.ToString()) == true) {
-                PathBuilder(builder, file_name);
+            if(Directory.Exists(builder.ToString()) == true) 
+            {
+                builder.Append("/");
+                builder.Append(Shared.file_name);
+
                 if(File.Exists(builder.ToString()) == true)
                 {
                     model = await file_management.Read_Configuration_File(builder.ToString());
@@ -33,10 +37,19 @@ namespace Proximity_Alert
                     await file_management.Create_Configuration_File(builder.ToString());
                 }
             }
-            else{
+            else
+            {
                 Directory.CreateDirectory(builder.ToString());
-                PathBuilder(builder, file_name);
+                builder.Append("/");
+                builder.Append(Shared.file_name);
+
+                
+
                 await file_management.Create_Configuration_File(builder.ToString());
+
+                Console.Clear();
+                Console.WriteLine($"\n\nConfiguration file created at: {builder.ToString()}/{Shared.file_name}\n\n");
+                Environment.Exit(0);
             }         
 
             return (ReturnType?)(object?)model;
@@ -50,11 +63,6 @@ namespace Proximity_Alert
         public Task<ReturnType?> Update<Value, ReturnType>(Value? value)
         {
             throw new NotImplementedException();
-        }
-
-        private void PathBuilder(StringBuilder builder, string section){
-            builder.Append("/");
-            builder.Append(section);
         }
     }
 }

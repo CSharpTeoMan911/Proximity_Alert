@@ -14,7 +14,7 @@ namespace Proximity_Alert
         // 'Echo' is the pin of the ultrasonic sensor that has a voltage 3.3V by default and when the sensor sound is received the voltage drops to 0V  
         private static readonly int Echo = 38;
 
-        // GPIO controller class used to control the GPIO of the RaspBerry PI
+        // GPIO controller class used to control the GPIO of the Raspberry PI
         private static GpioController gpio = new GpioController(PinNumberingScheme.Board);
 
         // 'DateTime' object that stores the datetime value when the ultrasonic pulse was initiated
@@ -39,11 +39,11 @@ namespace Proximity_Alert
         // Main entry point of the application
         public static void Main(string[] args)
         {
-            _= Main_Op().Result;
+            Main_Op().Wait();
         }
 
 
-        private static async Task<bool> Main_Op(){
+        private static async Task Main_Op(){
             await Get_Config();
 
             System.Timers.Timer cache_cleanup = new System.Timers.Timer();
@@ -71,10 +71,8 @@ namespace Proximity_Alert
                 SendUltrasonicPulse();
 
                 // Sleep the current CPU thread 1000 milliseconds (1 second)
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
-
-            return true;
         }
 
 
@@ -83,7 +81,7 @@ namespace Proximity_Alert
         public static async void OnUltrasonicPulseReceived(object sender, PinValueChangedEventArgs args){
             
             // If the voltage changed in the 'Echo' pin and the voltage is the minimum value (0 V)
-            if(PinEventTypes.Falling == args.ChangeType)
+            if(args.ChangeType == PinEventTypes.Falling)
             {
                 // Get the total number of milliseconds and divide them by 1000 to get the total number of seconds ellapsed
                 double seconds = (DateTime.Now - pulse_init).TotalMilliseconds / 1000;
@@ -108,7 +106,7 @@ namespace Proximity_Alert
                 int distance = (int)(seconds * 34300 / 2);
 
                 if(distance <= 30){
-                    if((DateTime.Now - last_proximity_alert).TotalMinutes >= 10){
+                    if((DateTime.Now - last_proximity_alert).TotalMinutes >= Shared.model.notification_period_minutes){
                         last_proximity_alert = DateTime.Now;
                         await SnapShot();
                     }
@@ -142,8 +140,12 @@ namespace Proximity_Alert
         // Method that is deallocating unmanaged objects from the RAM memory and that is closing the opened GPIO pins
         private static void DeallocateObjectsFromRAM(){
             shudown = true;
-            gpio?.ClosePin(Trig);
-            gpio?.ClosePin(Echo);
+            try
+            {
+                gpio?.ClosePin(Trig);
+                gpio?.ClosePin(Echo);
+            }
+            catch{}
             gpio?.Dispose();
         }
     }
