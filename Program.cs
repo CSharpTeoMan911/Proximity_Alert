@@ -8,10 +8,10 @@ namespace Proximity_Alert
 
     class Program:Shared
     {
-        // 'Trig' is the pin of the ultrasonic sensor that when a voltage of 3.3V is applied it sends an ultrasonic pulse
+        // 'Trig' is the pin of the ultrasonic sensor that when a voltage of 5V is applied it sends an ultrasonic pulse
         private static readonly int Trig = 40;
 
-        // 'Echo' is the pin of the ultrasonic sensor that has a voltage 3.3V by default and when the sensor sound is received the voltage drops to 0V  
+        // 'Echo' is the pin of the ultrasonic sensor that has a voltage 5V by default and when the sensor sound is received the voltage drops to 0V  
         private static readonly int Echo = 38;
 
         // GPIO controller class used to control the GPIO of the Raspberry PI
