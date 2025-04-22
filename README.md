@@ -224,12 +224,26 @@ Ensure your Firebase rules are set to allow access from the app and replace YOUR
 ```
 // Example of configuration file structure and content
 {
+  # The Firebase app api key
   "api_key": "AIzaSyB-n2fwkr6_ZzRRTpzIE FEQW3x9YMIaPg", 
+
+  # The email of the admin user within the 'Firebase Authentication' service
   "user_email": "your_email_address@gmail.com",
+
+  # The password of the admin user within the 'Firebase Authentication' service
   "user_password": "your_email_password",
+
+   # The firebase authentication url
   "firebase_auth_domain": "proximity-alert-bf91a.firebaseapp.com",
+  
+  # The firebase database url
   "firebase_database_url": "https://proximity-alert-bf91a-default-rtdb.firebaseio.com",
-  "proximity_alert_expiration_start: 10"
+
+  # Determines the max age of any alerts before being deleted 
+  "alert_expiration_days": 10,
+
+  # Determines at what 'x' minutes interval the alerts must be added in the database
+  "notification_period_minutes": 5
 }
 ```
 
