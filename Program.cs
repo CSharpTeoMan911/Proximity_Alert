@@ -71,7 +71,7 @@ namespace Proximity_Alert
                 SendUltrasonicPulse();
 
                 // Sleep the current CPU thread 1000 milliseconds (1 second)
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
         }
 
@@ -96,16 +96,16 @@ namespace Proximity_Alert
                 //                                               //
                 //  t * 34300 cm/s = Distance to object and back //
                 //                                               //
-                //  (t * 34300 cm/s) / 2) = Distance to object   //
+                //  ((t * 34300 cm/s) / 2) = Distance to object  //
                 //                                               //
-                //  d = (t * s) / 2                              //
+                //  d = (t * S) / 2                              //
                 //                                               //
                 ///////////////////////////////////////////////////
 
                 // Distance is the elapsed time times the speed of sound divided by 2
                 int distance = (int)(seconds * 34300 / 2);
 
-                if(distance <= 30){
+                if(distance <= Shared.model.distance_cm){
                     if((DateTime.Now - last_proximity_alert).TotalMinutes >= Shared.model.notification_period_minutes){
                         last_proximity_alert = DateTime.Now;
                         await SnapShot();

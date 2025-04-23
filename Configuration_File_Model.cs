@@ -11,5 +11,7 @@ namespace Proximity_Alert{
 
         // Interval in minutes to check for proximity alerts
         public int notification_period_minutes {get;set;} = 5;
+
+        public int distance_cm = 50;
     }
 }
