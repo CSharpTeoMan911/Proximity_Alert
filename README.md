@@ -91,7 +91,7 @@ This enables you to have a full desktop interface when needed, without compromis
 
 ![352779028-3c77f498-eb2f-4824-9f13-873712e92855](https://github.com/user-attachments/assets/d03d3fa9-6b9d-4bd2-b8c4-1df39a735c31)
 
-![Calculate distance](https://github.com/user-attachments/assets/a7f2946b-cbc6-4914-bd7e-4d4524c3ea2c)
+![352782796-a7f2946b-cbc6-4914-bd7e-4d4524c3ea2c](https://github.com/user-attachments/assets/5db066ea-e5f8-4744-8508-f9c9363ad8ab)
 
 ![Pin-out legend](https://github.com/user-attachments/assets/25a26f1f-2333-4e78-9d73-518eaf3eb54b)
 
