@@ -224,6 +224,9 @@ Ensure your Firebase rules are set to allow access from the app and replace YOUR
 ```
 // Example of configuration file structure and content
 {
+  # The minimum distance at which the proximity alert is set to be triggered in 'cm'
+  "distance_cm":"50"
+
   # The Firebase app api key
   "api_key": "AIzaSyB-n2fwkr6_ZzRRTpzIE FEQW3x9YMIaPg", 
 
