@@ -2,6 +2,9 @@
 ## Overview
 This project leverages a Raspberry Pi 4 microserver running Ubuntu Server 24.04 LTS, with a proximity alert service designed to detect objects within a specified radius, that is set within the app's configuration. The app is coming pre-configured with a radius of 50cm. It utilizes advanced features like ultrasonic sensors and C# to create a robust, real-time monitoring system. The application has a **React** frontend that allows the admin user to view and delete proximity alerts in real-time. The front-end application repository can be viewed [here](https://github.com/CSharpTeoMan911/proximity-view), whereas the deployed website can be viewed [here](https://proximity-alert-raspberrypi.web.app/).
 
+![ProximityView site](https://github.com/user-attachments/assets/50d6332a-3781-40b8-b718-54167ffb9d15)
+
+
 # Key Features
 * Proximity Detection: Uses ultrasonic sensors for real-time object distance detection.
 * Efficient Server: Runs efficiently without a GUI, activating only when required, making the most of Raspberry Pi’s capabilities. 💪
